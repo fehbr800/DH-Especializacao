@@ -1,18 +1,24 @@
 import React from 'react'
 import '../styles/NavBar.scss'
-import { Navbar } from 'react-bootstrap'
+import { Navbar, Container } from 'react-bootstrap'
 
 
-export default function NavBar() {
+export default function NavBar({ children }) {
     return (
 
         <>
-            <Navbar>
-                <div className="header justify-content-center d-flex align-items-center min-vw-100 ">
-                    <h1 className="title ">Shop Products</h1>
-                </div>
+            <Navbar className="header">
+                <Container className='justify-content-center'>
+                    <Navbar.Brand className='' href="#home">
+                        <h1 className='text-light'>
+                            Shop Products
+                        </h1>
+                    </Navbar.Brand>
+                </Container>
             </Navbar>
+            {children}
         </>
+
     )
 
 }

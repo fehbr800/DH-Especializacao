@@ -4,8 +4,8 @@
 
 
 .product {
-  height: 10em;
-  width: 30em;
+  height: 10rem;
+  width: 32rem;
   border: solid 1px;
   border-radius: 8px;
   border-color: #C3C3C3;
@@ -13,24 +13,25 @@
 }
 
 .product-image {
-  width: 200px ;
+  width: 150px ;
   height: 100%;
-  object-fit:cover ;
+  object-fit:fill ;
 }
 
 .product-title {
-  font-size: 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
 
 }
 
 .product-brand {
-  font-size: 12px;
+  font-size: .8em;
   color: #F3BD30;
   font-weight: bold;
 
 }
 
 .product-price {
-  font-size: 20px;
+  font-size: 1.2em;
   font-weight: bold;
 }
