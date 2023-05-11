@@ -9,7 +9,7 @@ export default function RoutesProducts() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<NavBar><Home /></NavBar>} />
-                <Route path="/productDetails/:id" element={<ProductDetail/>} />
+                <Route path="/productDetails/:id" element={<NavBar><ProductDetail/></NavBar>} />
             </Routes>
         </BrowserRouter>
     );

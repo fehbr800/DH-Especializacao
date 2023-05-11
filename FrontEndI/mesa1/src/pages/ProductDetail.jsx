@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import '../styles/ProductDetail.scss'
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-
   const [showListProducts, setShowListProducts] = useState([]);
 
   useEffect(() => {
@@ -39,35 +39,37 @@ const ProductDetail = () => {
 
 
   return (
-    <Container className="mt-3">
-      <Row>
-        <Col md={6}>
-          <Card>
-            <Card.Img variant="top" src={product.images?.[0]} />
-            <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
-              <Card.Text>{product.description}</Card.Text>
-              <Card.Text>R$ {product.price}</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={6}>
+    <Container fluid className="mt-3 p-2">
+     
+      
+       
+        <div className="d-flex productDetail">
+            <img src={product.thumbnail} />
+            <div className="d-flex align-items-center ">
+              <h2>{product.brand}</h2>
+              <p>{product.description}</p>
+              <p>R$ {product.price}</p>
+              </div>
+        </div>
+      
+      
+        <Col className="mt-5 " md={6}>
           <h3>Veja outros produtos</h3>
           <Row>
             {randomProducts.slice(0, 4).map((prod) => (
-              <Col xs={6} md={3} key={prod.id}>
-                <Card>
-                  <Card.Img variant="top" src={prod.images?.[0]} />
-                  <Card.Body>
+              <Col xs={6} md={4} key={prod.id} className="d-flex">
+                <Card className="product-card d-flex flex-row p-1">
+                  <Card.Img variant="left d-flex w-50" src={prod.images?.[0]} />
+                  <Card.Body className="d-flex row p-2 m-2 ">
                     <Card.Title>{prod.title}</Card.Title>
-                    <Card.Text>R$ {prod.price}</Card.Text>
+                    <Card.Text style={{color: "#F3BD30"}}>R$ {prod.price}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
             ))}
           </Row>
         </Col>
-      </Row>
+     
     </Container>
   );
 };
