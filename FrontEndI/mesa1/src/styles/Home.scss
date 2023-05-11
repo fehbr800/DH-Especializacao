@@ -1,0 +1,36 @@
+* {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+.product {
+  height: 10em;
+  width: 30em;
+  border: solid 1px;
+  border-radius: 8px;
+  border-color: #C3C3C3;
+
+}
+
+.product-image {
+  width: 200px ;
+  height: 100%;
+  object-fit:cover ;
+}
+
+.product-title {
+  font-size: 24px;
+
+}
+
+.product-brand {
+  font-size: 12px;
+  color: #F3BD30;
+  font-weight: bold;
+
+}
+
+.product-price {
+  font-size: 20px;
+  font-weight: bold;
+}
