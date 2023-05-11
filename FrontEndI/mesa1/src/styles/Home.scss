@@ -3,35 +3,24 @@
 }
 
 
-.product {
-  height: 10rem;
-  width: 32rem;
-  border: solid 1px;
-  border-radius: 8px;
-  border-color: #C3C3C3;
+.product-card {
+  border: 1px solid #ccc;
 
-}
 
-.product-image {
-  width: 150px ;
-  height: 100%;
-  object-fit:fill ;
-}
+  .card-img-left {
+    height: 10em;
+    object-fit: cover;
+  }
 
-.product-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  .card-title {
+    font-size: 1.25rem;
+   
+  }
 
-}
+  .card-text {
+    font-size: 1rem;
+   
+  }
 
-.product-brand {
-  font-size: .8em;
-  color: #F3BD30;
-  font-weight: bold;
-
-}
-
-.product-price {
-  font-size: 1.2em;
-  font-weight: bold;
+ 
 }
