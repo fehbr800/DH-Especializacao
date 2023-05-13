@@ -17,6 +17,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: 'Ubuntu', sans-serif;;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -45,3 +46,4 @@ table {
 @import url('./Home.scss');
 @import url('./NavBar.scss');
 @import url('./ProductDetail.scss');
+@import url('./Login.scss');

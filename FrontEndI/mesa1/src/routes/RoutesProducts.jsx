@@ -9,16 +9,16 @@ import Login from '../pages/login/Login';
 function RoutesProducts() {
     return (
         <BrowserRouter>
-            <MyProvider>
-                <Routes>
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/' element={<NavBar />}>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/productDetails/:id" element={<ProductDetail />} />
-                    </Route>
-                </Routes>
-            </MyProvider>
-        </BrowserRouter>
+        <MyProvider>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path="/" element={<NavBar />}>
+            <Route path='/' element={<Home />} />
+            <Route path="/productDetails/:id" element={<ProductDetail />} />
+            </Route>
+          </Routes>
+        </MyProvider>
+      </BrowserRouter>
     );
 };
 

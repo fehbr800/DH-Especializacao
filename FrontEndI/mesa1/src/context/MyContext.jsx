@@ -28,7 +28,7 @@ const MyProvider = ({ children }) => {
  
   return (
     <MyContext.Provider
-      value={{logout,userEmail, changeUserEmail }}
+      value={{userEmail, changeUserEmail, logout }}
     >
       {children}
     </MyContext.Provider>
