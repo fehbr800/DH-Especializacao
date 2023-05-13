@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import '../styles/ProductDetail.scss'
+import '../../styles/ProductDetail.scss'
 
 const ProductDetail = () => {
   const { id } = useParams();
