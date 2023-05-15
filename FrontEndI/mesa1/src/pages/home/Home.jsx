@@ -25,7 +25,7 @@ export default function Home() {
              <Link className="text-decoration-none text-black" to={`/productDetails/${product.id}`}>
           <Card className="product-card d-flex flex-row p-1">
             <Card.Img variant="left d-flex w-50" src={product.images[0]} />
-            <Card.Body className="d-flex row p-2 m-2 ">
+            <Card.Body className="d-flex row p-1 m-1 ">
               <Card.Title >{product.title}</Card.Title>
               <Card.Text >
                 {product.brand}

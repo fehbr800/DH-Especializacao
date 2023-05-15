@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react';
 import { MyContext } from "../../context/MyContext";
-import { Button, Container, Form, Card } from 'react-bootstrap';
+import { Button, Container, Form, Card, Navbar } from 'react-bootstrap';
 import '../../styles/Login.scss'
 
 export default function Login() {
@@ -23,10 +23,14 @@ export default function Login() {
     }
 
     return (
-        <div className='container-login d-flex align-items-center'>
-        <Container className='d-flex'>
+        
+        <div className='container-login d-flex flex-column align-items-center '>
+            <Navbar.Brand className='mt-5 '>
+                <h1 className='text-light'>Shop Products</h1>
+            </Navbar.Brand>
+        <Container className='d-flex justify-content-center m-auto'>
 
-            <Card>
+            <Card className='d-flex p-3'>
                 <Card.Body>
                     <Card.Text>
                         <h3 className="card-title text-center">Login</h3>
@@ -36,7 +40,7 @@ export default function Login() {
                         <p className="card-text text-center mb-4">Insira seus dados para entrar no
                             sistema</p>
                     </Card.Text>
-                    <Form onSubmit={handleFormSubmit}>
+                    <Form className='d-flex align-items-center flex-wrap row justify-content-center align-content-center' onSubmit={handleFormSubmit}>
                         <Form.Group className='mb-3' controlId="formBasicEmail">
                         
                             <Form.Control

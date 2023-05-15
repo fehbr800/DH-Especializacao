@@ -22,19 +22,19 @@ export default function NavBar() {
     return (
 
         <div>
-            <Navbar className="header">
+            <Navbar className="header flex-wrap">
                 <Container className='justify-content-evenly'>
-                    <Navbar.Brand className='d-flex' href="#home">
+                    <Navbar.Brand className='d-flex flex-wrap' href="#home">
                         <h1 className='text-light'>
                             Shop Products    
                         </h1>
                     </Navbar.Brand>
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center flex-wrap">
             {userEmail ? (
               <>
-                <p className="mx-5">{userEmail}</p>
-                <button className="btn btn-danger" onClick={handleLogoutClick}>
-                  Logout
+                <p className="mx-lg-5 mx-md-auto text-light">{userEmail}</p>
+                <button className="btn btn-warning text-light" onClick={handleLogoutClick}>
+                  sair
                 </button>
               </>
             ) : (
