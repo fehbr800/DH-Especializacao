@@ -1,5 +1,5 @@
 // Home.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import useTodo from '../hooks/useTodo';
 import CardList from './components/CardList';
@@ -10,6 +10,7 @@ const Home = () => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [id, setId] = useState(null);
+  const [showLoader, setShowLoader] = useState(true);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +39,15 @@ const Home = () => {
     setTitle('');
   };
 
-  if (isFetching) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 1000); // Defina o tempo de atraso desejado em milissegundos
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showLoader) {
     return (
       <div className="loader">
         <div className="loader-text">Loading...</div>
@@ -47,9 +56,11 @@ const Home = () => {
     );
   }
 
+
   if (error) {
     return <h3>Erro ao buscar dados</h3>;
   }
+
 
   return (
     <Container>
