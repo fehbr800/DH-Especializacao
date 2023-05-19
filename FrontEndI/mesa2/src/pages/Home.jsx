@@ -1,48 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, ListGroup } from 'react-bootstrap';
-import { getTodos, createTodo } from '../services/todoApi';
+// Home.jsx
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import useTodo from '../hooks/useTodo';
+import CardList from './components/CardList';
+import '../styles/Loading.scss';
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
+  const { addTodo, editTodo, deleteTodo, error, isFetching, todos } = useTodo();
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
+  const [id, setId] = useState(null);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
-    try {
-      const todos = await getTodos();
-      setPosts(todos);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
-  };
-
-  const handleSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (!title || !date) return;
-    try {
-      await createTodo({
-        title: title,
-        date: date,
-      });
-      setTitle('');
-      setDate('');
-      fetchPosts();
-    } catch (error) {
-      console.error('Error creating post:', error);
+    if (id) {
+      editTodo({ payload: { title, date }, id });
+      setId(null);
+    } else {
+      addTodo({ title, date });
     }
+    clearState();
   };
+
+  const handleEdit = (todo) => {
+    setId(todo._id);
+    setTitle(todo.title);
+    const dateFormatted = todo.date.split('T')[0];
+    setDate(dateFormatted);
+  };
+
+  const handleDelete = (id) => {
+    deleteTodo(id);
+  };
+
+  const clearState = () => {
+    setDate('');
+    setTitle('');
+  };
+
+  if (isFetching) {
+    return (
+      <div className="loader">
+        <div className="loader-text">Loading...</div>
+        <div className="loader-bar"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <h3>Erro ao buscar dados</h3>;
+  }
 
   return (
     <Container>
       <Row>
-
         <Col>
-          <h1>Create Post</h1>
-          <Form onSubmit={handleSubmit}>
+          <h1>Criar Tarefa</h1>
+          <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="formTitle">
               <Form.Label>Title</Form.Label>
               <Form.Control
@@ -65,12 +79,8 @@ const Home = () => {
           </Form>
         </Col>
         <Col>
-          <h1>Posts</h1>
-          <ListGroup>
-            {posts.map((post) => (
-              <ListGroup.Item key={post.id}>{post.title}</ListGroup.Item>
-            ))}
-          </ListGroup>
+          <h1>Tarefas</h1>
+          <CardList todos={todos} onEdit={handleEdit} onDelete={handleDelete} />
         </Col>
       </Row>
     </Container>
