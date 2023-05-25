@@ -38,27 +38,33 @@ export default function Table(props) {
   return (
     <div>
       <h1>Minha table</h1>
-      <ul>
-        {data.map((aluno, index) => {
-          delete aluno._id;
-          delete aluno.__v;
-
-          return (
-            <li key={index}>
-              <>
-                <p>{JSON.stringify(aluno)}</p>
-                <h5>{index + 1}</h5>
-                <h4>{aluno.nome}</h4>
-                <p>{aluno.matricula}</p>
-                <p>{aluno.curso}</p>
-                <p>{aluno.bimestre}</p>
-                <button onClick={() => preencherCampos(aluno)}>Editar</button>
-                <button onClick={() => apagarAluno(aluno._id)}>Excluir</button>
-              </>
-            </li>
-          );
-        })}
-      </ul>
+      <table className="min-w-full">
+        <thead>
+          <tr>
+            <th className="py-2 px-4 font-semibold text-left">Ordem</th>
+            <th className="py-2 px-4 font-semibold text-left">Nome</th>
+            <th className="py-2 px-4 font-semibold text-left">Matricula</th>
+            <th className="py-2 px-4 font-semibold text-left">Curso</th>
+            <th className="py-2 px-4 font-semibold text-left">Bimestre</th>
+            <th className="py-2 px-4 font-semibold text-left">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((aluno) => (
+            <tr className="border-b ">
+              <td>1</td>
+              <td>{aluno.nome}</td>
+              <td>{aluno.matricula}</td>
+              <td>{aluno.curso}</td>
+              <td>{aluno.bimestre}</td>
+              <td >
+                <button className="bg-green-400 text-sm p-2 transition-transform ease-in-out delay-100 mx-3 text-white font-semibold" onClick={() => preencherCampos(aluno)} >Editar</button>
+                <button className="bg-red-400 text-sm p-2 transition ease-out delay-100 text-white font-semibold" onClick={() => apagarAluno(aluno._id)}>Excluir</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

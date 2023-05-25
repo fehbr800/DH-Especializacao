@@ -4,6 +4,7 @@ import Form from "./components/form/Form";
 import Table from "./components/table/Table";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
+import "./styles.css"
 
 const client = new QueryClient();
 

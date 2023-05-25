@@ -58,8 +58,9 @@ export default function Form(props) {
   }
 
   return (
-    <div>
+    <div className="min-w-full flex justify-center">
       <input
+      className="mx-2 border-collapse"
         placeholder="Nome"
         value={formData.nome}
         onChange={(event) =>
@@ -67,6 +68,7 @@ export default function Form(props) {
         }
       />
       <input
+       className="mx-2"
         placeholder="Matricula"
         value={formData.matricula}
         onChange={(event) =>
@@ -75,6 +77,7 @@ export default function Form(props) {
       />
 
       <select
+       className="mx-2"
         defaultValue={formData.curso}
         onChange={(event) =>
           setFormData({ ...formData, curso: event.target.value })
@@ -92,7 +95,7 @@ export default function Form(props) {
           setFormData({ ...formData, bimestre: event.target.value })
         }
       />
-      <button onClick={formData.id ? edit : save}>Salvar</button>
+      <button className="mx-2" onClick={formData.id ? edit : save}>Salvar</button>
     </div>
   );
 }
