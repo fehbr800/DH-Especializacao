@@ -29,7 +29,7 @@ function App() {
 
   return (
     <QueryClientProvider client={client}>
-      <h1>Diário Eletrônico</h1>
+      <h1 className="text-2xl font-bold">Diário Eletrônico</h1>
 
       <Form
         formData={formData}
