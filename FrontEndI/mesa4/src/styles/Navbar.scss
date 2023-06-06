@@ -1,3 +1,29 @@
-.menuNav{
+.menuNav {
     background: #410094;
+    height: 50px;
+
+    @media screen and (max-width: 767px) {
+        .collapse a {
+            color: white;
+            background-color: #410094;
+            transition: 0.2s;
+            -webkit-transition: 0.2s;
+            -moz-transition: 0.2s;
+            -ms-transition: 0.2s;
+            -o-transition: 0.2s;
+
+            &:hover {
+                background: purple;
+                transition: 0.1s;
+                -webkit-transition: 0.1s;
+                -moz-transition: 0.1s;
+                -ms-transition: 0.1s;
+                -o-transition: 0.1s;
+            }
+        }
+    }
+}
+
+.custom-toggle  {
+    background: white;
 }

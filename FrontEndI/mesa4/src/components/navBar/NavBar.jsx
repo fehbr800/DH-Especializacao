@@ -2,28 +2,21 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "../../styles/Navbar.scss";
 
 export default function NavBar() {
   return (
-    <Navbar className="p-3 menuNav d-flex" expand="lg">
-      <Container>
-        <Navbar.Brand className=" text-light" href="#home">
-          DigiWallet
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto ">
-            <Nav.Link className=" text-light" href="#home">
-              Home
-            </Nav.Link>
-            <Nav.Link className=" text-light" href="#link">
-              Link
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <Navbar className="menuNav text-light" expand="md">
+    <Container className="d-flex">
+      <Navbar.Brand className="text-light" href="#">DigiWallet</Navbar.Brand>
+      <Navbar.Toggle  aria-controls="navbar-collapse" className="custom-toggle "  />
+      <Navbar.Collapse className="justify-content-end "  id="navbar-collapse  ">
+        <Nav className=" md-auto text-center">
+          <Nav.Link className="text-light"  href="#">Home</Nav.Link>
+          <Nav.Link className="text-light"   href="#">Sobre</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
   );
 }
