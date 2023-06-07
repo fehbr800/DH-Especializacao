@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -20,6 +22,7 @@ const Login: React.FC = () => {
     console.log('Email:', email);
     console.log('Password:', password);
     setIsLoading(false);
+   
   };
   return (
     <div className="flex justify-center items-center h-screen bg-primary">
