@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors")
 
 
 require("dotenv").config();
@@ -13,7 +14,7 @@ const produtoRouter = require("./routes/produto")
 
 // Analisar o corpo das solicitações como JSON
 app.use(express.json());
-
+app.use(cors())
 app.use("/produto", produtoRouter)
 
 
