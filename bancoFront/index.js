@@ -6,7 +6,7 @@ const cors = require("cors")
 require("dotenv").config();
 require("./db")
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3333;
 
 
 // Importar o modelo do produto
@@ -19,6 +19,6 @@ app.use("/produto", produtoRouter)
 
 
 
-app.listen(port, () => {
-  console.log(`O servidor está rodando na porta ${port}`);
+app.listen(PORT, () => {
+  console.log(`O servidor está rodando na porta ${PORT}`);
 });
