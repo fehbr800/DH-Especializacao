@@ -13,7 +13,7 @@ const CardList = ({ todos, onEdit, onDelete }) => {
               <div className='toDoItem'>
               <h2>{todo.title}</h2>
               <h3>{formatDate(todo.date)}</h3>
-              <Button onClick={() => onEdit(todo)}>Editar</Button>
+              <Button className='mx-2' onClick={() => onEdit(todo)}>Editar</Button>
               <Button onClick={() => onDelete(todo._id)}>Apagar</Button>
               </div>
              
