@@ -12,7 +12,6 @@ const CardList = ({ todos, onEdit, onDelete }) => {
             <ListGroup.Item key={idx}>
               <div className='toDoItem'>
               <h2>{todo.title}</h2>
-              <h2>{todo.categorie}</h2>
               <h3>{formatDate(todo.date)}</h3>
               <Button className='mx-2' onClick={() => onEdit(todo)}>Editar</Button>
               <Button onClick={() => onDelete(todo._id)}>Apagar</Button>

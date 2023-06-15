@@ -9,7 +9,6 @@ import "../styles/Home.scss";
 const Home = () => {
   const { addTodo, editTodo, deleteTodo, error, isFetching, todos } = useTodo();
   const [title, setTitle] = useState("");
-  const [categorie, setCategorie] = useState("")
   const [date, setDate] = useState("");
   const [id, setId] = useState(null);
   const [showLoader, setShowLoader] = useState(true);
@@ -17,10 +16,10 @@ const Home = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      editTodo({ payload: { title, categorie, date }, id });
+      editTodo({ payload: { title, date }, id });
       setId(null);
     } else {
-      addTodo({ title, categorie , date });
+      addTodo({ title, date });
     }
     clearState();
   };
@@ -28,7 +27,6 @@ const Home = () => {
   const handleEdit = (todo) => {
     setId(todo._id);
     setTitle(todo.title);
-    setCategorie(todo.categorie);
     const dateFormatted = todo.date.split("T")[0];
     setDate(dateFormatted);
   };
@@ -38,7 +36,6 @@ const Home = () => {
   };
 
   const clearState = () => {
-    setCategorie("")
     setDate("");
     setTitle("");
   };
@@ -79,13 +76,6 @@ const Home = () => {
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group controlId="formBody">
-                <Form.Label>Date</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={categorie}
-                  onChange={(e) => setCategorie(e.target.value)}
-                />
               <Form.Group controlId="formDate">
                 <Form.Label>Date</Form.Label>
                 <Form.Control
