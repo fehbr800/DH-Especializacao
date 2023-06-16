@@ -1,4 +1,4 @@
-// actions.js
+
 export const addTask = task => ({
     type: 'ADD_TASK',
     payload: task,
@@ -14,5 +14,6 @@ export const addTask = task => ({
     payload: { taskId, updatedTask },
   });
   
-  // Outras ações podem ser definidas aqui
-  
+  export const clearTodo = () => ({
+    type: 'CLEAR_TODO',
+  });

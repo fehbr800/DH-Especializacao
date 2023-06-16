@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { connect } from 'react-redux'; // Importe connect do react-redux
-import { addTask, editTask, removeTask } from '../redux/reducers/actions'; // Importe as ações correspondentes
+import { connect } from 'react-redux';
+import { addTask, editTask, removeTask } from '../redux/reducers/actions';
 import CardList from './components/CardList';
 import '../styles/Loading.scss';
 import '../styles/Home.scss';
 
-const Home = ({ tasks, addTask, editTask, deleteTask }) => {
+const Home = ({ tasks, addTask, editTask, removeTask }) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [id, setId] = useState(null);
@@ -15,7 +15,7 @@ const Home = ({ tasks, addTask, editTask, deleteTask }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      editTask({ title, date, id });
+      editTask({ id, title, date });
       setId(null);
     } else {
       addTask({ title, date });
@@ -41,7 +41,7 @@ const Home = ({ tasks, addTask, editTask, deleteTask }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoader(false);
-    }, 1000); // Defina o tempo de atraso desejado em milissegundos
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -79,9 +79,9 @@ const Home = ({ tasks, addTask, editTask, deleteTask }) => {
                 />
               </Form.Group>
 
-              <button type="submit" className="btn mt-2 w-50 botaoSubmit">
+              <Button type="submit" className="btn mt-2 w-50 botaoSubmit">
                 Create
-              </button>
+              </Button>
             </Form>
           </div>
         </Col>
