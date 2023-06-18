@@ -22,12 +22,6 @@ const todoReducer = (state = initialState, action) => {
           } : task
         ),
       };
-    case 'CLEAR_TODO':
-
-      return {
-        ...state,
-        tasks: [],
-      };
     default:
       return state;
   }

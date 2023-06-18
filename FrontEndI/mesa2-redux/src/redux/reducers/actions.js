@@ -14,6 +14,3 @@ export const addTask = task => ({
     payload: { taskId, updatedTask },
   });
   
-  export const clearTodo = () => ({
-    type: 'CLEAR_TODO',
-  });

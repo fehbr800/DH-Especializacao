@@ -56,7 +56,7 @@ const Home = ({ tasks, addTask, editTask, removeTask }) => {
   }
 
   return (
-    <Container fluid className="homepage">
+    <Container fluid className="homepage p-3">
       <Row>
         <Col className="d-flex flex-column justify-content-center align-content-center mt-auto">
           <div className="create-task d-flex flex-column align-items-center">
