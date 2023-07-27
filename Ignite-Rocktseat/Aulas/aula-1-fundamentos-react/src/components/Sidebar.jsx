@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.css'
 import cardbackground from '../assets/nubelson-fernandes--Xqckh_XVU4-unsplash.jpg'
-import {PencilLine } from 'phosphor-react'
+import {PencilLine } from '@phosphor-icons/react'
 
 export function Sidebar(){
    return(
