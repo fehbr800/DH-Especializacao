@@ -21,14 +21,20 @@ export function Post({ author, publishedAt, content }) {
     addSuffix: true,
   });
 
-  function newComment(e) {
-    e.preventDefault();
+  function newComment(eve) {
+    eve.preventDefault();
     setComments([...comments, newCommentChange]);
     setNewCommentChange("");
   }
 
   function handleNewCommentChange(eve) {
+    eve.target.setCustomValidity('')
     setNewCommentChange(eve.target.value);
+  }
+
+  function newCommentInvalid(eve){
+    eve.target.setCustomValidity('Esse campo é obrigatório!.')
+    
   }
 
   function deleteComment(commentToDelete) {
@@ -38,6 +44,8 @@ export function Post({ author, publishedAt, content }) {
 
     setComments(newCommentList)
   }
+
+  const isNewCommentEmpty = newCommentChange.length === 0;
 
   return (
     <article className={styles.post}>
@@ -77,11 +85,13 @@ export function Post({ author, publishedAt, content }) {
           name="comment"
           value={newCommentChange}
           onChange={handleNewCommentChange}
+          onInvalid={newCommentInvalid}
+          required
           placeholder="Deixe um comentário"
         />
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentEmpty}>Publicar</button>
         </footer>
       </form>
 
