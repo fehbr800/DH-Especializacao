@@ -1,30 +1,22 @@
-import { TaskTodo } from "./components/addTodoList";
+import { useState } from "react";
 import { Navbar } from "./components/navbar";
-import { TodoContainer } from "./components/todoContainer";
-import uuid from 'react-uuid';
+import { AddTask, Itask } from "./components/addTask";
+
+const initialTasks: Itask[] = [
+  { id: 1, name: "Ir na academia" },
+  { id: 2, name: "Comprar mantimentos" },
+  
+];
 
 export default function App() {
-  const taskTodo: TaskTodo[] = [
-    {
-      id: uuid(),
-      title: "Ir na praça",
-      isComplete: true,
-    },
-    {
-      id: uuid(),
-      title: "Ir na Raissa",
-      isComplete: false,
-    },
-  ];
-
-  console.log(taskTodo);
+  const [tasks, setTasks] = useState<Itask[]>(initialTasks);
 
   return (
     <div>
       <Navbar />
-      <main className="mt-4 p-4 flex justify-center ">
-        {taskTodo.map((todo) => (
-          <TodoContainer key={todo.id} todoTasks={[todo]} />
+      <main>
+        {tasks.map((task) => (
+          <AddTask key={task.id} task={task} />
         ))}
       </main>
     </div>
