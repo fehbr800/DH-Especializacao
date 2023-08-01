@@ -14,6 +14,7 @@ export default {
         gray100: "#F2F2F2",
         blueDark: "#1E6F9F",
         blue: "#4EA8DE",
+        purple: "#8284FA",
       }
     },
   },
