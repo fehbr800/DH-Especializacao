@@ -2,22 +2,32 @@ import { PlusCircle } from "@phosphor-icons/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { TaskCardComponent } from "./taskCard";
 
-export interface Itask {
+
+interface Itask{
   id: number;
   name: string;
 }
 
-interface taskProps {
-  task: Itask;
+export interface AddTaskProps {
+  tasks: Itask[];
+  onAddTask: (newTaskName: string) => void;
+  onDeleteTask: (taskToDelete: string) => void;
+ 
 }
 
-export function AddTask({ task }: taskProps) {
-  const [taskChange, setTask] = useState([task.name]);
+export function AddTask({ tasks, onAddTask, onDeleteTask}: AddTaskProps) {
   const [newTask, setNewTask] = useState("");
 
   function handleAddTask(event: FormEvent) {
     event.preventDefault();
-    setTask([...taskChange, newTask]);
+    if (typeof newTask !== "string") return; // Verifica se newTask é uma string
+    if (newTask.trim() === "") return;
+  
+
+    // Call the onAddTask function to add the new task to the shared tasks list
+    onAddTask(newTask);
+
+    // Clear the newTask state after adding the task
     setNewTask("");
   }
 
@@ -26,38 +36,40 @@ export function AddTask({ task }: taskProps) {
     setNewTask(event.target.value);
   }
 
-  function deleteTask(taskToDelete: string) {
-    const newTaskList = taskChange.filter((task) => task !== taskToDelete);
-    setTask(newTaskList);
-  }
+  // function handleDeleteTask(taskId: number) {
+  //   const newTaskList = tasks.filter((task) => task.id !== taskId);
+  //   setNewTask(newTaskList);
+  // }
 
   const notDisable =
     "bg-blueDark rounded-md font-bold px-4 py-2 gap-1 items-center flex";
   const disableButton = notDisable + " bg-blue";
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="absolute top-[8rem] ">
       <form onSubmit={handleAddTask}>
-        <input
-          placeholder="Adicione uma nova tarefa"
-          className="py-2 px-2 bg-gray-500 w-full"
-          type="text"
-          value={newTask}
-          onChange={handleNewTaskChange}
-        />
-        <button
-          type="submit"
-          className={newTask.trim() === "" ? disableButton : notDisable}
-        >
-          Criar <PlusCircle size={20} weight="bold" />
-        </button>
+        <div className="flex space-x-1 gap-2 text-gray100">
+          <input
+            placeholder="Adicione uma nova tarefa"
+            className="p-4 bg-gray500 w-full rounded-lg focus:outline-none"
+            type="text"
+            value={newTask}
+            onChange={handleNewTaskChange}
+          />
+          <button
+            type="submit"
+            className={newTask.trim() === "" ? disableButton : notDisable}
+          >
+            Criar <PlusCircle size={20} weight="bold" />
+          </button>
+        </div>
       </form>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {taskChange.map((taskCard, index) => (
+      <div className="flex justify-center flex-wrap items-center w-[80vw] ">
+        {tasks.map((task) => (
           <TaskCardComponent
-            key={index}
-            task={taskCard}
-            onDeleteTask={deleteTask}
+            key={task.id}
+            task={task.name}
+            onDeleteTask={onDeleteTask}
           />
         ))}
       </div>
