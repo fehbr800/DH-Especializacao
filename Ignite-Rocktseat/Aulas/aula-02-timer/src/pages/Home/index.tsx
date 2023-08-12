@@ -1,5 +1,7 @@
 import { Play } from "@phosphor-icons/react";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
 
 import {
   CountDownContainer,
@@ -10,20 +12,39 @@ import {
   StartComponentButton,
   TaskInput,
 } from "./styles";
-
-
-
+import { useState } from "react";
 
 // Formas de trabalhar com o formulário com React:
-// Controlled / uncontrolled 
+// Controlled / uncontrolled
 //Controlled: forma de manter a informação do usuário no estado em tempo real; Ex: Pequenos, formularios, e poucos inputs
 //Uncontrolled: busca a informação somente quando for preciso; Ex: Dashboards, varios inputs
 
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, "Informe a tarefa"),
+  minutesAmount: zod.number().min(5).max(60),
+});
+
+type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>;
+
+interface Cycle {
+  id: string;
+  task: string;
+  minutesAmount: number;
+}
+
 export function Home() {
+  const [cycles, setCycles] = useState<Cycle[]>([]);
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
+  const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
+    resolver: zodResolver(newCycleFormValidationSchema),
+    defaultValues: {
+      task: "",
+      minutesAmount: 0,
+    },
+  });
 
- const {register, handleSubmit, watch} = useForm()
-
-/*
+  /*
 function register(name: string){
 ela   return{
   onChange:() => void,
@@ -34,15 +55,35 @@ ela   return{
 
 */
 
-  function handleCreateNewCycle(data){
- console.log(data)
+  function handleCreateNewCycle(data: NewCycleFormData) {
+    const id = String(new Date().getTime());
 
+    const newCycle: Cycle = {
+      id,
+      task: data.task,
+      minutesAmount: data.minutesAmount,
+    };
 
+    setCycles((state) => [...state, newCycle]);
+    setActiveCycleId(id);
+
+    reset();
   }
 
-  const task = watch('task')
+  const activeCycle = cycles.find((cycle) => cycle.id == activeCycleId);
+
+  const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
+  const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
+
+  const minutesAmount = Math.floor(currentSeconds / 60);
+  const secondsAmount = currentSeconds % 60;
+
+  const minutes = String(minutesAmount).padStart(2, "0");
+  const seconds = String(secondsAmount).padStart(2, "0");
+
+  const task = watch("task");
   const isSubmitDisabled = !task;
-  
+
   return (
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
@@ -53,8 +94,7 @@ ela   return{
             type="text"
             id="task"
             placeholder="Dê um nome para o seu projeto"
-            {...register('task')}
-           
+            {...register("task")}
           />
 
           <datalist id="task-suggestions">
@@ -72,19 +112,19 @@ ela   return{
             step={5}
             min={5}
             max={60}
-            {...register('minutesAmount',{valueAsNumber: true})}
+            {...register("minutesAmount", { valueAsNumber: true })}
           />
           <span>minutos.</span>
         </FormContainer>
 
         <CountDownContainer>
-          <span>0</span>
-          <span>0</span>
+          <span>{minutes[0]}</span>
+          <span>{minutes[1]} </span>
           <Separator>:</Separator>
-          <span>0</span>
-          <span>0</span>
+          <span>{seconds[0]} </span>
+          <span>{seconds[1]} </span>
         </CountDownContainer>
-        <StartComponentButton disabled={isSubmitDisabled}  type="submit">
+        <StartComponentButton disabled={isSubmitDisabled} type="submit">
           Começar <Play size={24} />{" "}
         </StartComponentButton>
       </form>
