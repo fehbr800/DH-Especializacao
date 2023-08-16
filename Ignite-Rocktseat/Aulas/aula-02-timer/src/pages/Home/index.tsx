@@ -2,6 +2,7 @@ import { Play } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
+import { differenceInSeconds } from "date-fns";
 
 import {
   CountDownContainer,
@@ -12,7 +13,7 @@ import {
   StartComponentButton,
   TaskInput,
 } from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Formas de trabalhar com o formulário com React:
 // Controlled / uncontrolled
@@ -30,6 +31,7 @@ interface Cycle {
   id: string;
   task: string;
   minutesAmount: number;
+  startDate: Date;
 }
 
 export function Home() {
@@ -54,6 +56,16 @@ ela   return{
 }
 
 */
+  const activeCycle = cycles.find((cycle) => cycle.id == activeCycleId);
+  useEffect(() => {
+    if (activeCycle) {
+      setInterval(() => {
+        setAmountSecondsPassed(
+          differenceInSeconds(new Date(), activeCycle.startDate)
+        );
+      }, 1000);
+    }
+  }, [activeCycle]);
 
   function handleCreateNewCycle(data: NewCycleFormData) {
     const id = String(new Date().getTime());
@@ -62,6 +74,7 @@ ela   return{
       id,
       task: data.task,
       minutesAmount: data.minutesAmount,
+      startDate: new Date(),
     };
 
     setCycles((state) => [...state, newCycle]);
@@ -69,8 +82,6 @@ ela   return{
 
     reset();
   }
-
-  const activeCycle = cycles.find((cycle) => cycle.id == activeCycleId);
 
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
