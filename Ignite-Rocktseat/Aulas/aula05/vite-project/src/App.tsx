@@ -1,13 +1,14 @@
-import { Button } from './components/ui/button'
+import { RouterProvider } from 'react-router-dom'
 import './global.css'
+import { router } from './routes/routes'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Toaster } from 'sonner'
 export function App() {
   return (
-    <>
-      <div className="flex justify-center h-screen items-center">
-        <Button size={'lg'} variant={'default'}>
-          Enviar
-        </Button>
-      </div>
-    </>
+    <HelmetProvider>
+      <Helmet titleTemplate='%s | pizza.shop '/>
+      <Toaster richColors/>
+       <RouterProvider router={router}/>
+    </HelmetProvider>
   )
 }
