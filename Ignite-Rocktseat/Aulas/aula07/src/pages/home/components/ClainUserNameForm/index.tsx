@@ -5,6 +5,7 @@ import { ArrowRight } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
 
 const ClaimUserNameFormSchema = z.object({
   username: z
@@ -17,6 +18,7 @@ const ClaimUserNameFormSchema = z.object({
 type ClaimUserNameFormData = z.infer<typeof ClaimUserNameFormSchema>
 
 export function ClaimUsernameForm() {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -26,7 +28,9 @@ export function ClaimUsernameForm() {
   })
 
   async function handleClaimUsername(data: ClaimUserNameFormData) {
-    console.log(data)
+    const { username } = data
+
+    await router.push(`/register?username=${username}`)
   }
   return (
     <>
