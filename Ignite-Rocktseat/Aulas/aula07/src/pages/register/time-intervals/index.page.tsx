@@ -23,6 +23,7 @@ import { getWeekDays } from '@/utils/get-week-days'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { convertTimeStringToMinutes } from '@/utils/convert-time-string-to-minutes'
 import { api } from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 const timeIntervalsFormSchema = z.object({
   intervals: z
@@ -87,7 +88,7 @@ export default function TimeIntervals() {
   })
   console.log(errors)
   const intervals = watch('intervals')
-
+  const router = useRouter()
   const weekDays = getWeekDays()
 
   const { fields } = useFieldArray({
@@ -98,7 +99,10 @@ export default function TimeIntervals() {
   async function handleSetTimeIntervals(data: TimeIntervalsFormOutput) {
     const { intervals } = data
     try {
-      await api.post('/users/time-intervals', { intervals })
+      await api.post('/users/time-intervals', {
+        intervals,
+      })
+      await router.push('/register/update-profile')
       console.log('Intervalos de tempo enviados com sucesso.')
     } catch (error) {
       console.error('Erro ao enviar intervalos de tempo:', error)
